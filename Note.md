@@ -102,7 +102,7 @@ Thus, the original message \(M = 7\) is recovered.
 
 ---
 
-## **2. Hash Functions**
+### **3. Hash Functions**
 
 ### **What is a Hash Function?**
 - A **hash function** is a mathematical function that takes an input (data of any size) and produces a fixed-size output called a **hash** or **digest**.
@@ -149,7 +149,7 @@ Thus, the original message \(M = 7\) is recovered.
 
 ---
 
-## **3. Message Authentication Code (MAC)**
+### **4. Message Authentication Code (MAC)**
 
 ### **What is MAC?**
 - A **Message Authentication Code** is a small piece of data (a “tag”) generated using:
@@ -193,12 +193,10 @@ If they match: The message is valid.
 ### **Limitations of MAC**
 1. The secret key must be **shared securely** between the sender and receiver.
 2. It doesn’t provide non-repudiation (the sender could deny creating the MAC).
-
+   
 ---
 
----
-
-## **4. HMAC (Hash-based MAC)**
+### **5. HMAC (Hash-based MAC)**
 
 ### **What is HMAC?**
 - HMAC stands for **Hash-based Message Authentication Code**.
@@ -249,7 +247,7 @@ The receiver uses the same process to verify the HMAC.
 
 ---
 
-## **5. Digital Signatures**
+### **6. Digital Signatures**
 
 ### **What is a Digital Signature?**
 A **digital signature** is like an electronic seal that:
