@@ -102,10 +102,6 @@ Thus, the original message \(M = 7\) is recovered.
 
 ---
 
-Of course! Let’s dive even deeper into **Hash Functions**, **MAC**, **HMAC**, and **Digital Signatures**. I’ll use simple language, detailed steps, and plenty of examples so you can write lengthy, confident answers in your exam.
-
----
-
 ## **2. Hash Functions**
 
 ### **What is a Hash Function?**
