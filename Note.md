@@ -245,8 +245,6 @@ The receiver uses the same process to verify the HMAC.
 
 ---
 
----
-
 ### **6. Digital Signatures**
 
 ### **What is a Digital Signature?**
@@ -501,8 +499,6 @@ A **digital signature** is a cryptographic mechanism that:
 ---
 
 ## **Only Numerical**
-
-Certainly! I'll reanalyze your lecture notes thoroughly and provide step-by-step solutions to the problems and additional explanations wherever needed. Let me extract and address the **numerical examples and key problems** from the notes.
 
 ### **Reanalysis of Problems in the Notes**
 The lecture notes contain problems for:
