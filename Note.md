@@ -39,66 +39,17 @@ The RSA algorithm has **three main parts**:
 
 ---
 
-#### **Step 1: Key Generation**
-1. **Choose Two Large Prime Numbers (\(p\) and \(q\))**:
-   - Example: \(p = 13\), \(q = 17\).
-2. **Compute \(n = p \times q\)**:
-   - \(n = 13 \times 17 = 221\).
-   - \(n\) is the **modulus** used in encryption and decryption.
-3. **Calculate the Totient (\(\phi(n)\))**:
-   \[
-   \phi(n) = (p - 1)(q - 1)
-   \]
-   Example: \(\phi(221) = (13 - 1)(17 - 1) = 192\).
-4. **Choose the Public Key Exponent (\(e\))**:
-   - \(e\) must satisfy \(1 < e < \phi(n)\), and \(gcd(e, \phi(n)) = 1\) (relatively prime to \(\phi(n)\)).
-   - Example: \(e = 35\).
-5. **Calculate the Private Key (\(d\))**:
-   - Solve:
-     \[
-     (e \times d) \mod \phi(n) = 1
-     \]
-   - Example:
-     - \(35 \times d \mod 192 = 1\)
-     - \(d = 11\).
+![image](https://github.com/user-attachments/assets/17cbe68c-e058-4546-a2e8-bd5d6230545d)
 
-- **Public Key**: \((e, n) = (35, 221)\).
-- **Private Key**: \((d, n) = (11, 221)\).
+![image](https://github.com/user-attachments/assets/34842ba0-5880-4c5c-bf70-18a94ae044bd)
 
 ---
 
-#### **Step 2: Encryption**
-The sender uses the **public key** \((e, n)\) to encrypt a message \(M\):
-\[
-C = M^e \mod n
-\]
-Where:
-- \(M\): The plaintext message.
-- \(C\): The ciphertext.
-
-**Example**:
-- Message \(M = 7\).
-- Public Key: \((e, n) = (35, 221)\).
-- Compute:
-  \[
-  C = 7^{35} \mod 221 = 106
-  \]
+![image](https://github.com/user-attachments/assets/12876468-3f7d-4fc5-9433-3d29debcfa98)
 
 ---
 
-#### **Step 3: Decryption**
-The recipient uses their **private key** \((d, n)\) to decrypt the ciphertext \(C\):
-\[
-M = C^d \mod n
-\]
-**Example**:
-- Ciphertext \(C = 106\).
-- Private Key: \((d, n) = (11, 221)\).
-- Compute:
-  \[
-  M = 106^{11} \mod 221 = 7
-  \]
-Thus, the original message \(M = 7\) is recovered.
+![image](https://github.com/user-attachments/assets/f7a84118-648d-42f2-8ba7-b4e27c662695)
 
 ---
 
@@ -212,14 +163,8 @@ If they match: The message is valid.
    - First, hash the message with the key and padding.
    - Second, hash the result again with the key and another padding.
 
-Formula:
-\[
-\text{HMAC}(K, M) = \text{Hash}((K \oplus \text{opad}) \parallel \text{Hash}((K \oplus \text{ipad}) \parallel M))
-\]
-Where:
-- \(K\): Secret key.
-- \(M\): Message.
-- \(opad, ipad\): Padding constants.
+![image](https://github.com/user-attachments/assets/68b6d437-e201-4a8c-8a24-32fe2b00b0ac)
+
 
 ---
 
@@ -320,59 +265,6 @@ RSA is a widely used public-key cryptosystem that allows secure data transmissio
 
 ---
 
-#### **Steps in RSA:**
-
-1. **Key Generation:**
-   - Select two large prime numbers \(p\) and \(q\).
-   - Compute \(n = p \times q\) (modulus).
-   - Compute \(\phi(n) = (p-1)(q-1)\) (Euler’s totient function).
-   - Choose a public key exponent \(e\) such that \(1 < e < \phi(n)\) and gcd(\(e, \phi(n)\)) = 1.
-   - Compute the private key \(d\) such that:
-     \[
-     (e \times d) \mod \phi(n) = 1
-     \]
-   - Publish \((e, n)\) as the public key. Keep \((d, n)\) as the private key.
-
-2. **Encryption:**
-   - Convert plaintext message \(M\) to a number less than \(n\).
-   - Encrypt using the public key:
-     \[
-     C = M^e \mod n
-     \]
-   - \(C\): Ciphertext.
-
-3. **Decryption:**
-   - Decrypt using the private key:
-     \[
-     M = C^d \mod n
-     \]
-   - Recover plaintext \(M\).
-
----
-
-#### **Example:**
-1. Choose \(p = 3\), \(q = 11\):
-   - \(n = 3 \times 11 = 33\),
-   - \(\phi(n) = (3-1)(11-1) = 20\).
-
-2. Choose \(e = 7\), gcd(\(7, 20\)) = 1.
-
-3. Compute \(d\) such that \((7 \times d) \mod 20 = 1\), \(d = 3\).
-
-4. Public key: \((7, 33)\), Private key: \((3, 33)\).
-
-5. Encrypt \(M = 5\):
-   \[
-   C = 5^7 \mod 33 = 14
-   \]
-
-6. Decrypt \(C = 14\):
-   \[
-   M = 14^3 \mod 33 = 5
-   \]
-
----
-
 #### **Applications of RSA:**
 1. **Secure Web Browsing**: Used in HTTPS.
 2. **Email Encryption**: Ensures confidentiality of emails.
@@ -418,9 +310,9 @@ A **Message Authentication Code (MAC)** is a cryptographic checksum generated us
 #### **How MAC Works:**
 1. Sender and receiver share a **secret key**.
 2. Sender computes MAC:
-   \[
+
    MAC = F(Key, Message)
-   \]
+  
 3. The receiver computes the MAC again upon receiving the message. If both MACs match, the message is authentic.
 
 ---
@@ -511,209 +403,55 @@ Let’s go through each topic with an explanation and problem-solving steps.
 
 ---
 
-### **1. RSA Problems**
+![image](https://github.com/user-attachments/assets/99ea0ee7-acf6-4a6d-baf6-ca93e5b56d81)
 
-#### **Key Problem 1: Find the value of \(e\)**
-**Given:**
-- \(p = 3\), \(q = 11\), \(d = 7\).
 
-**Solution:**
-1. Compute \(n = p \times q\):
-   \[
-   n = 3 \times 11 = 33
-   \]
+![image](https://github.com/user-attachments/assets/ad7c6d23-101a-4324-85da-84911df69a2c)
 
-2. Compute \(\phi(n) = (p-1)(q-1)\):
-   \[
-   \phi(n) = (3-1)(11-1) = 2 \times 10 = 20
-   \]
-
-3. Use the relation:
-   \[
-   d \times e \mod \phi(n) = 1
-   \]
-   Substitute \(d = 7\), \(\phi(n) = 20\):
-   \[
-   7 \times e \mod 20 = 1
-   \]
-
-4. Solve for \(e\):
-   - Multiply \(7 \times e\) until it’s divisible by 20 with a remainder of 1:
-     - \(7 \times 1 = 7 \mod 20 \neq 1\)
-     - \(7 \times 2 = 14 \mod 20 \neq 1\)
-     - \(7 \times 3 = 21 \mod 20 = 1\)
-
-   So, \(e = 3\).
 
 ---
 
-#### **Key Problem 2: Find the value of \(d\)**
-**Given:**
-- \(p = 3\), \(q = 5\), \(e = 3\).
+![image](https://github.com/user-attachments/assets/f6667cf9-2d22-442c-a5ab-2a28b7d32d64)
 
-**Solution:**
-1. Compute \(n = p \times q\):
-   \[
-   n = 3 \times 5 = 15
-   \]
-
-2. Compute \(\phi(n) = (p-1)(q-1)\):
-   \[
-   \phi(n) = (3-1)(5-1) = 2 \times 4 = 8
-   \]
-
-3. Use the relation:
-   \[
-   d \times e \mod \phi(n) = 1
-   \]
-   Substitute \(e = 3\), \(\phi(n) = 8\):
-   \[
-   d \times 3 \mod 8 = 1
-   \]
-
-4. Solve for \(d\):
-   - Multiply \(3 \times d\) until it’s divisible by 8 with a remainder of 1:
-     - \(3 \times 1 = 3 \mod 8 \neq 1\)
-     - \(3 \times 2 = 6 \mod 8 \neq 1\)
-     - \(3 \times 3 = 9 \mod 8 = 1\)
-
-   So, \(d = 3\).
+![image](https://github.com/user-attachments/assets/b1dbe01d-ff82-43c4-b43a-17f3816256c3)
 
 ---
 
-#### **Key Problem 3: Encrypt and Decrypt a Message**
-**Given:**
-- \(p = 17\), \(q = 11\), \(e = 7\), Message \(M = 88\).
+![image](https://github.com/user-attachments/assets/a28fc0dc-f90f-4beb-a093-1faf8d2cedb4)
 
-**Solution:**
-1. Compute \(n = p \times q\):
-   \[
-   n = 17 \times 11 = 187
-   \]
 
-2. Compute \(\phi(n) = (p-1)(q-1)\):
-   \[
-   \phi(n) = (17-1)(11-1) = 16 \times 10 = 160
-   \]
+![image](https://github.com/user-attachments/assets/e4f4a05a-054c-4583-9923-548fe69b85bb)
 
-3. Public key: \((e, n) = (7, 187)\).
+![image](https://github.com/user-attachments/assets/97ecdfca-0da2-4cfc-b7e6-28e0abc03e8c)
 
-4. Compute private key \(d\):
-   Solve:
-   \[
-   d \times e \mod \phi(n) = 1
-   \]
-   Substitute \(e = 7\), \(\phi(n) = 160\):
-   - \(7 \times d \mod 160 = 1\).
-   - \(d = 23\) (found by trial or extended Euclidean algorithm).
-
-5. **Encryption**:
-   Use:
-   \[
-   C = M^e \mod n
-   \]
-   Substitute \(M = 88\), \(e = 7\), \(n = 187\):
-   \[
-   C = 88^7 \mod 187 = 11
-   \]
-
-6. **Decryption**:
-   Use:
-   \[
-   M = C^d \mod n
-   \]
-   Substitute \(C = 11\), \(d = 23\), \(n = 187\):
-   \[
-   M = 11^{23} \mod 187 = 88
-   \]
-
-   The decrypted message is \(M = 88\).
 
 ---
 
 ### **2. Diffie-Hellman Key Exchange**
 
-#### **Key Problem: Compute the Shared Secret**
-**Given:**
-- \(g = 5\), \(p = 23\), \(a = 6\), \(b = 15\).
+![image](https://github.com/user-attachments/assets/d7355e3a-72af-4071-8674-0d10016c8729)
 
-**Solution:**
-1. **Step 1**: Compute \(A\) (Alice's public key):
-   \[
-   A = g^a \mod p = 5^6 \mod 23 = 8
-   \]
-
-2. **Step 2**: Compute \(B\) (Bob's public key):
-   \[
-   B = g^b \mod p = 5^{15} \mod 23 = 19
-   \]
-
-3. **Step 3**: Compute shared secret:
-   - Alice computes:
-     \[
-     S = B^a \mod p = 19^6 \mod 23 = 2
-     \]
-   - Bob computes:
-     \[
-     S = A^b \mod p = 8^{15} \mod 23 = 2
-     \]
-
-   Shared secret: \(S = 2\).
+![image](https://github.com/user-attachments/assets/88543021-c0f7-41c4-9d11-31c445c6b21e)
 
 ---
 
 ### **3. HMAC Problems**
 
-#### **Example Problem: Compute HMAC**
-**Given:**
-- Message \(M = "Hello"\),
-- Key \(K = "1234"\),
-- Hash function: SHA-256.
+![image](https://github.com/user-attachments/assets/042cbe2c-8b9d-4d47-8e66-221a04bf8de0)
 
-**Solution:**
-1. **Step 1**: Create padded keys:
-   - Inner padding (\(ipad\)) and outer padding (\(opad\)) are constants.
-   - \(K \oplus ipad\): XOR key with \(ipad\).
-   - \(K \oplus opad\): XOR key with \(opad\).
 
-2. **Step 2**: Hash the inner combination:
-   \[
-   H_1 = \text{Hash}((K \oplus ipad) \parallel M)
-   \]
+![image](https://github.com/user-attachments/assets/95c13df5-518e-4db9-b30f-cf78d256b1be)
 
-3. **Step 3**: Hash the outer combination:
-   \[
-   HMAC = \text{Hash}((K \oplus opad) \parallel H_1)
-   \]
-
-   Use SHA-256 to compute the intermediate and final hashes.
 
 ---
 
 ### **4. Digital Signature Problems**
 
-#### **Example Problem: Verify a Signature**
-**Given:**
-- Message \(M = "Hello"\),
-- Hash of the message: \(H(M) = 5d41402a...\),
-- Sender’s private key \(d = 7\),
-- Modulus \(n = 33\),
-- Public key \(e = 3\).
+![image](https://github.com/user-attachments/assets/298cf659-ff65-4c56-964d-2809986bd9fa)
 
-**Solution:**
-1. Sender computes the signature:
-   \[
-   S = H(M)^d \mod n
-   \]
-   Substitute \(H(M) = 5d41402a...\) (convert to number), \(d = 7\), \(n = 33\).
 
-2. Receiver verifies:
-   \[
-   H'(M) = S^e \mod n
-   \]
-   Substitute \(S\), \(e = 3\), \(n = 33\).
+![image](https://github.com/user-attachments/assets/0c8080f3-77a9-4751-81cb-2641c6fa7f97)
 
-3. If \(H'(M)\) matches the original \(H(M)\), the signature is valid.
 
 ---
 
@@ -729,45 +467,12 @@ RSA holo **ekta public-key cryptosystem** ja **asymmetric encryption** er upor b
 - **Digital Signatures**: Sender er identity verify korte private key diye signature kora hoy.
 - **Security**: RSA er security chhilo **factoring problem** er upor, mane je onek boro prime number er **factorization** khub kothin, jar karone RSA ke safe rakha hoy.
 
-#### **RSA Steps:**
+![image](https://github.com/user-attachments/assets/2521311e-3253-43c6-b3f7-28f50048af16)
 
-1. **Key Generation (Chabi toiri kora)**:
-   - **Step 1**: Duto large prime number \(p\) aar \(q\) choose koro. Example: \(p = 17\), \(q = 11\).
-   - **Step 2**: Compute modulus \(n = p \times q\). Example: \(n = 17 \times 11 = 187\).
-   - **Step 3**: Compute totient function \(\phi(n)\), ja \((p-1)(q-1)\) er moto kora hoy. Example: \(\phi(187) = (17-1)(11-1) = 160\).
-   - **Step 4**: Choose public key exponent \(e\) jehetu \(1 < e < \phi(n)\) ebong \(gcd(e, \phi(n)) = 1\). Example: \(e = 7\).
-   - **Step 5**: Calculate private key \(d\) er value ja satisfy kore: \((e \times d) \mod \phi(n) = 1\). Example: \(d = 23\).
+![image](https://github.com/user-attachments/assets/0b74ca6d-0420-4b09-b555-4a9a1dfb8b70)
 
-2. **Encryption (Message Encrypt kora)**:
-   - **Step 1**: Public key \(e\) ebong \(n\) use kore message \(M\) ke encrypt kora hoy. Formula: 
-     \[
-     C = M^e \mod n
-     \]
-     Jekhane \(C\) holo ciphertext ebong \(M\) holo original message.
 
-3. **Decryption (Message Decrypt kora)**:
-   - **Step 1**: Private key \(d\) ebong \(n\) use kore ciphertext \(C\) ke decrypt kora hoy. Formula:
-     \[
-     M = C^d \mod n
-     \]
-     Jekhane \(M\) holo decrypted message.
-
-#### **Example:**
-1. Choose \(p = 17\), \(q = 11\).
-   - \(n = 17 \times 11 = 187\), \(\phi(n) = (17-1)(11-1) = 160\).
-   - \(e = 7\) (chosen so that \(gcd(e, \phi(n)) = 1\)).
-   - Calculate \(d\): \((7 \times d) \mod 160 = 1\), so \(d = 23\).
-   - Public key: \((7, 187)\), Private key: \((23, 187)\).
-
-2. Encrypt \(M = 88\):
-   \[
-   C = 88^7 \mod 187 = 11
-   \]
-   
-3. Decrypt \(C = 11\):
-   \[
-   M = 11^{23} \mod 187 = 88
-   \]
+![image](https://github.com/user-attachments/assets/88325829-f574-4edf-9115-51a96cb20cbb)
 
 ---
 
@@ -821,16 +526,7 @@ Message Authentication Code (MAC) holo ekta cryptographic checksum je **message*
 #### **HMAC Ki?**
 HMAC holo ekta specific type er MAC ja hash function (like SHA-256) ke secret key er sathe combine kore. HMAC ke **more secure** banano hoyeche **double hashing** diye, ja cryptanalysis er against protect kore.
 
-#### **How HMAC Works**:
-1. **Key padding** kora hoy inner padding (\(ipad\)) and outer padding (\(opad\)) er sathe.
-2. HMAC function:
-   \[
-   HMAC = \text{Hash}((K \oplus opad) \parallel \text{Hash}((K \oplus ipad) \parallel M))
-   \]
-   Jekhane:
-   - \(K\) secret key,
-   - \(M\) message,
-   - \(ipad\) and \(opad\) are padding constants.
+![image](https://github.com/user-attachments/assets/6ed99aaa-a2e2-49e7-8f0a-8aefc29a32a7)
 
 #### **Advantages of HMAC**:
 1. **Security**: Double hashing makes it resistant to attacks.
