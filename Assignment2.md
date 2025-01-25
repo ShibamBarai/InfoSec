@@ -1,5 +1,3 @@
-# Networking Topics Assignment
-
 ## 1. Properties of a Good Network
 A good network must exhibit several essential characteristics to ensure efficient, reliable, and secure communication between devices. Here are the key properties explained in detail:
 - **Reliability**: Ensures continuous and error-free communication. By employing backup systems and protocols to handle failures, reliable networks minimize disruptions and ensure data transfer without loss, which is critical for businesses relying on consistent uptime. Additionally, reliability encompasses features like error correction mechanisms, robust hardware, and efficient monitoring tools to identify and address issues promptly.
