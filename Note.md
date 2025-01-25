@@ -1,4 +1,3 @@
-## **For CA**
 
 ### **1. Public-Key Cryptography**
   
@@ -118,6 +117,7 @@ The RSA algorithm has **three main parts**:
 3. The receiver, using the same **secret key**, generates their own MAC and compares it with the received MAC.
    - If they match, the message is valid.
    - If they don’t match, the message has been altered or is from an unauthenticated sender.
+![image](https://github.com/user-attachments/assets/59a3f5f2-d3c7-44e3-9477-819f97024199)
 
 ---
 
