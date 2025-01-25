@@ -23,6 +23,8 @@ Transmission modes define how data flows between devices in a communication syst
 - **Simplex**: Data flows in one direction only. Common in scenarios like television broadcasting, where feedback from the receiver isn’t required. Simplex communication is cost-effective and suitable for tasks that require only unidirectional data flow.
 - **Half-Duplex**: Data flows in both directions but only one direction at a time. Walkie-talkies are a classic example where one party talks while the other listens. This mode is efficient for communication systems where bidirectional communication is required but not simultaneously.
 - **Full-Duplex**: Allows simultaneous data flow in both directions, enabling real-time communication, such as in telephones. This is the most efficient mode, minimizing delays and ensuring smooth interactions for applications like video calls and online gaming.
+![image](https://github.com/user-attachments/assets/6bb5e925-fa12-4a3e-a0bf-ef2f168f18e7)
+
 
 ## 4. Types of Computer Networks
 Computer networks are categorized by their size, coverage, and purpose:
@@ -62,8 +64,14 @@ Network protocols enable communication between devices. Key protocols include:
 ## 8. Network Topologies
 Network topology describes how devices in a network are arranged and connected. Common types include:
 - **Bus Topology**: All devices connect to a single central cable. Cost-effective but has a single point of failure. Bus topology is suitable for small, temporary networks.
+![image](https://github.com/user-attachments/assets/2cce5248-3ac6-4058-9eda-0980a0b3210b)
+
 - **Star Topology**: Devices connect to a central hub or switch. Easy to troubleshoot, but hub failure disrupts the network. This topology is widely used in modern LANs due to its reliability and scalability.
+![image](https://github.com/user-attachments/assets/7f6e82da-8331-4a89-a339-b00a4248f6d9)
+
 - **Ring Topology**: Devices form a circular loop. Equal access to data but difficult to troubleshoot. Ring topology ensures equal bandwidth for all devices, making it ideal for networks with uniform traffic.
+![image](https://github.com/user-attachments/assets/eac8c0cf-3f9d-4abc-809e-87759b4c5496)
+
 - **Mesh Topology**: Every device connects to every other device. Highly reliable but expensive and complex. Mesh topology is commonly used in mission-critical systems requiring high availability.
-- **Tree Topology**: Hierarchical structure resembling tree branches. Scalable but requires careful maintenance. This topology combines the advantages of star and bus topologies, making it ideal for large networks.
-- **Hybrid Topology**: Combines features of other topologies for flexibility and scalability, albeit at higher costs. Hybrid topologies are versatile, supporting diverse network requirements efficiently.
+![image](https://github.com/user-attachments/assets/3cf605f5-4349-45da-aaef-d173597a0bb2)
+
