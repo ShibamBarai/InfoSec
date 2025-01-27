@@ -1069,3 +1069,162 @@ The SSL Record Protocol provides two essential services for communication:
 4. The encrypted block is transmitted to the recipient, who decrypts and verifies the MAC.
 
 ---
+
+### **Introduction to Email Security**
+
+Email is one of the most widely used network services in the world. It is a primary mode of communication for individuals, businesses, and governments. Despite its widespread use and importance, email communication is highly vulnerable to various security threats.  
+
+#### **Why is Email Security Important?**  
+1. **Insecure Content:**  
+   - Email messages are often transmitted in plaintext, meaning anyone intercepting the communication can read its contents.  
+
+2. **Inspection Risks:**  
+   - Email messages can be inspected or modified during transmission by attackers or by privileged users on the destination server.  
+
+3. **Widespread Attacks:**  
+   - Phishing, spoofing, and man-in-the-middle attacks frequently target email systems, making them a significant source of data breaches.
+
+Implementing email security ensures that sensitive messages remain private, authentic, and unaltered.
+
+---
+
+### **Email Security Requirements**
+
+To ensure secure email communication, the following requirements must be met:  
+
+#### **1. Confidentiality:**  
+- **What it Means:** Protecting the contents of an email from unauthorized access or disclosure.  
+- **Why it Matters:** Prevents sensitive information (e.g., passwords, financial data) from being intercepted by attackers.  
+
+#### **2. Authentication:**  
+- **What it Means:** Verifying the identity of the email sender to ensure the message genuinely originates from the claimed individual or system.  
+- **Why it Matters:** Prevents impersonation and phishing attacks.  
+
+#### **3. Message Integrity:**  
+- **What it Means:** Ensuring that the email’s content remains unaltered during transmission.  
+- **Why it Matters:** Protects against tampering or corruption of the message.  
+
+#### **4. Non-Repudiation of Origin:**  
+- **What it Means:** Ensuring that the sender cannot deny having sent the email.  
+- **Why it Matters:** Useful for resolving disputes or verifying legal communications.
+
+---
+
+### **Email Protocols**
+
+To send and receive emails, several protocols are used. These protocols handle different aspects of email transmission and storage:  
+
+#### **1. SMTP (Simple Mail Transfer Protocol):**  
+- **Purpose:** Handles the sending of emails.  
+- **Ports:**  
+  - Port **25** for unencrypted communication.  
+  - Port **587** for TLS/SSL encrypted communication.  
+- **Limitation:**  
+  - Only supports outgoing mail. A separate protocol (e.g., POP3 or IMAP) is needed to retrieve incoming emails.  
+
+#### **2. POP3 (Post Office Protocol Version 3):**  
+- **Purpose:** Downloads emails from the server to a local device and deletes them from the server.  
+- **Ports:**  
+  - Port **110** for unencrypted communication.  
+  - Port **995** for SSL-encrypted communication.  
+- **Limitation:**  
+  - Emails are not stored on the server, so they cannot be accessed from multiple devices.  
+
+#### **3. IMAP (Internet Message Access Protocol):**  
+- **Purpose:** Allows users to access and manage emails directly on the server without downloading them.  
+- **Ports:**  
+  - Port **143** for unencrypted communication.  
+  - Port **993** for SSL-encrypted communication.  
+- **Advantage:**  
+  - Emails can be accessed and synchronized across multiple devices.  
+
+---
+
+### **Internet Mail Architecture**
+
+![image](https://github.com/user-attachments/assets/d4f5660b-bafe-4b86-a043-dcec0cef5b37)
+
+Email communication follows a layered architecture involving the sender, server, and recipient. Messages are processed through the following steps:  
+1. The **SMTP server** forwards outgoing emails from the sender to the recipient's mail server.  
+2. The recipient retrieves the email using either **POP3** (downloads the email) or **IMAP** (manages emails directly on the server).  
+3. Security measures, such as encryption and authentication, are applied to protect the data during these steps.  
+
+---
+
+### **Pretty Good Privacy (PGP)**
+
+**Pretty Good Privacy (PGP)** is one of the most widely used tools for secure email communication.  
+
+#### **Key Features of PGP:**  
+1. Developed by **Phil Zimmermann** in the early 1990s.  
+2. Combines the best available cryptographic algorithms into a single program.  
+3. Works across multiple platforms, including Unix, PC, and Macintosh systems.  
+4. Originally offered as a free tool but is now available in commercial versions as well.  
+
+---
+
+### **PGP Operations**
+
+PGP provides three primary security services for email: **Authentication**, **Confidentiality**, and **Integrity (CIA)**.  
+
+#### **1. Authentication and Integrity:**  
+- Ensures that the email is from the claimed sender and that it has not been altered.  
+- Steps:  
+  1. The sender creates a message.  
+  2. A 160-bit hash of the message is generated using the **SHA-1** algorithm.  
+  3. The hash is signed with the sender’s private RSA key and attached to the message.  
+  4. The receiver decrypts the signature using the sender’s public RSA key to verify the hash.  
+  5. The receiver compares the received hash with the calculated hash of the message. If they match, the message is authentic and intact.  
+
+#### **2. Confidentiality:**  
+- Protects the email content from unauthorized access.  
+- Steps:  
+  1. The sender generates a 128-bit random session key.  
+  2. The session key is used to encrypt the message using a symmetric encryption algorithm.  
+  3. The session key is then encrypted using the recipient’s public RSA key and attached to the message.  
+  4. The recipient decrypts the session key using their private RSA key.  
+  5. The session key is used to decrypt the email message.  
+
+#### **3. Combined CIA Services:**  
+- PGP allows users to combine authentication, integrity, and confidentiality in a single operation.  
+- Steps:  
+  1. The sender creates a signature and attaches it to the message.  
+  2. The combined message and signature are encrypted.  
+  3. The encrypted message is sent along with the RSA/ElGamal encrypted session key.
+
+---
+
+### **Additional PGP Features**
+
+#### **1. Compression:**  
+- By default, PGP compresses the message after signing but before encrypting.  
+- Benefits:  
+  - The uncompressed message and signature can be stored for later verification.  
+  - Compression reduces the message size, improving efficiency.  
+- Uses the **ZIP compression algorithm.**  
+
+#### **2. Email Compatibility:**  
+- Email systems were designed to handle only text data. However, PGP generates binary data for encryption.  
+- To ensure compatibility, PGP converts binary data into printable ASCII characters using the **radix-64 encoding** algorithm.  
+- Features of radix-64 encoding:  
+  - Maps 3 bytes of binary data to 4 printable characters.  
+  - Appends a **CRC (Cyclic Redundancy Check)** to detect transmission errors.  
+
+#### **3. Message Segmentation:**  
+- If the message is too large, PGP segments it into smaller parts for transmission.  
+
+---
+
+### **PGP Session Keys**
+
+#### **Why Session Keys are Needed:**  
+- Each message requires a unique **session key** to ensure secure communication.  
+- The session key is generated using random inputs, including user keystroke timing and previous session keys.  
+
+#### **Types of Session Keys:**  
+- Session keys can vary in size and algorithm, such as:  
+  - **56-bit DES (Data Encryption Standard)**.  
+  - **128-bit CAST or IDEA.**  
+  - **168-bit Triple-DES.**  
+
+---
