@@ -527,3 +527,190 @@ The **Advanced Encryption Standard (AES)** replaced DES as the standard encrypti
 3. Simple design, ensuring ease of implementation.
 
 --- 
+
+### **Introduction to Asymmetric Cryptography (Public-Key Cryptography)**
+
+#### **What is Asymmetric Cryptography?**
+Asymmetric cryptography, also known as public-key cryptography or two-key cryptography, is a method of encryption that uses **two separate keys**:  
+1. **Public Key:**  
+   - This key is shared openly and can be known by anyone.  
+   - It is used to **encrypt messages** and **verify signatures**.  
+
+2. **Private Key:**  
+   - This key is kept secret and known only to the owner.  
+   - It is used to **decrypt messages** and **create (sign) digital signatures**.  
+
+The process is called **asymmetric** because:  
+- A message encrypted using the **public key** can only be decrypted using the **private key**, and vice versa.  
+- The person encrypting the message cannot decrypt it, ensuring security and privacy.
+
+---
+
+### **Why Public-Key Cryptography?**
+
+Public-key cryptography was developed to address two critical issues that were challenging in symmetric cryptography:  
+
+1. **Key Distribution:**  
+   - In symmetric cryptography, both parties must share the same secret key beforehand. This creates the problem of securely distributing the key without exposing it to attackers.  
+   - Public-key cryptography eliminates this problem because the **public key** can be shared freely without compromising security.  
+
+2. **Digital Signatures:**  
+   - Verifying the authenticity and integrity of a message was difficult in earlier methods.  
+   - Digital signatures provide a reliable way to ensure that a message comes from the claimed sender and has not been altered.
+
+#### **History:**  
+- Public-key cryptography was invented in 1976 by **Whitfield Diffie** and **Martin Hellman** at Stanford University.  
+- Though it was already known in classified military research, the public discovery revolutionized cryptography.
+
+---
+
+### **Applications of Public-Key Cryptography**
+
+Public-key cryptography has three primary applications:  
+
+1. **Encryption/Decryption:**  
+   - Ensures data secrecy by encrypting sensitive information.  
+
+2. **Digital Signatures:**  
+   - Provides authentication by verifying that a message came intact from the claimed sender.  
+
+3. **Key Exchange:**  
+   - Allows two parties to securely exchange a shared secret key for later use in symmetric encryption.
+
+---
+
+### **Diffie-Hellman Key Exchange**
+
+The **Diffie-Hellman Key Exchange (DHKE)** was the first public-key cryptographic algorithm. It provides a way for two parties (e.g., Alice and Bob) to agree on a shared secret key without meeting in person or having any prior communication.  
+
+#### **The Problem it Solves:**
+- Alice and Bob want to communicate securely using symmetric encryption but don’t have a shared key.  
+- How can they securely agree on a key without allowing an eavesdropper to intercept it?
+
+#### **How the Diffie-Hellman Algorithm Works:**
+1. **Agreement on Public Parameters:**  
+   - Alice and Bob agree on two public numbers:  
+     - `g` (Generator): A small integer.  
+     - `p` (Prime Number): A large prime number.  
+     - These values are not secret and can be shared openly.  
+
+2. **Private Key Selection:**  
+   - Alice selects a private number `a` (only known to her).  
+   - Bob selects a private number `b` (only known to him).  
+
+3. **Public Key Calculation:**  
+   - Alice computes `α = g^a mod p` and sends `α` to Bob.  
+   - Bob computes `β = g^b mod p` and sends `β` to Alice.  
+
+4. **Shared Secret Key Calculation:**  
+   - Alice computes `k = β^a mod p`.  
+   - Bob computes `k = α^b mod p`.  
+   - Both arrive at the same secret key `k` because of the mathematical properties of modular arithmetic.
+
+#### **Example:**  
+- Let `g = 5`, `p = 23`.  
+- Alice chooses `a = 6` → Computes `α = 5^6 mod 23 = 8`.  
+- Bob chooses `b = 15` → Computes `β = 5^15 mod 23 = 19`.  
+- Shared Key:  
+  - Alice computes `k = 19^6 mod 23 = 2`.  
+  - Bob computes `k = 8^15 mod 23 = 2`.  
+
+Now, Alice and Bob share the secret key `k = 2`.
+
+---
+
+### **RSA Algorithm**
+
+The **RSA Algorithm** is one of the most widely used public-key encryption methods. It was developed in 1977 by **Rivest**, **Shamir**, and **Adleman** at MIT.  
+
+#### **Key Features:**
+1. **Block Cipher Technique:**  
+   - Encrypts and decrypts data in blocks.  
+
+2. **Security Based on Factorization:**  
+   - RSA relies on the difficulty of factoring large composite numbers into their prime factors.  
+
+3. **Key Length:**  
+   - Common key sizes are 1024 or 2048 bits, which provide high levels of security.  
+
+---
+
+#### **How RSA Works:**
+
+**Key Generation:**
+1. **Choose Two Large Prime Numbers:**  
+   - Select `p` and `q` (e.g., `p = 13`, `q = 17`).  
+
+2. **Compute Modulus `n`:**  
+   - `n = p * q` (e.g., `n = 13 * 17 = 221`).  
+
+3. **Calculate Euler’s Totient `ø(n):`**  
+   - `ø(n) = (p - 1) * (q - 1)` (e.g., `ø(n) = (13 - 1) * (17 - 1) = 192`).  
+
+4. **Choose Public Key `e`:**  
+   - Select a number `e` such that `1 < e < ø(n)` and `gcd(e, ø(n)) = 1` (e.g., `e = 35`).  
+
+5. **Calculate Private Key `d`:**  
+   - Solve for `d` using `e * d mod ø(n) = 1` (e.g., `d = 11`).  
+
+**Public Key:** `{e, n}` → Used for encryption.  
+**Private Key:** `{d, n}` → Used for decryption.  
+
+---
+
+**Encryption Process:**  
+1. Obtain the recipient’s public key `{e, n}`.  
+2. Represent the message as a number `M` (0 ≤ M < n).  
+3. Encrypt the message:  
+   - `C = M^e mod n`.  
+
+**Decryption Process:**  
+1. Use the private key `{d, n}`.  
+2. Decrypt the ciphertext:  
+   - `M = C^d mod n`.  
+
+---
+
+#### **Example of RSA Encryption and Decryption:**
+
+1. **Key Setup:**  
+   - Choose `p = 17`, `q = 11`.  
+   - Compute `n = p * q = 187` and `ø(n) = 160`.  
+   - Select `e = 7` and calculate `d = 23` (since `7 * 23 mod 160 = 1`).  
+
+2. **Encryption:**  
+   - Message `M = 88`.  
+   - Ciphertext: `C = M^e mod n = 88^7 mod 187 = 11`.  
+
+3. **Decryption:**  
+   - Ciphertext `C = 11`.  
+   - Plaintext: `M = C^d mod n = 11^23 mod 187 = 88`.  
+
+---
+
+### **Key Applications of RSA**
+
+1. **Securing Communications:**  
+   - Encrypting emails and messages to prevent unauthorized access.  
+
+2. **Digital Signatures:**  
+   - Verifying the sender’s identity and ensuring the message hasn’t been altered.  
+
+3. **Key Exchange:**  
+   - Securely exchanging symmetric keys for further communication.  
+
+---
+
+### **Problem Solving Examples**
+
+1. **Find `e` in RSA:**  
+   - Given `p = 3`, `q = 11`, and `d = 7`.  
+   - Compute `n = p * q = 33` and `ø(n) = 20`.  
+   - Solve `7 * e mod 20 = 1` → `e = 3`.  
+
+2. **Find `d` in RSA:**  
+   - Given `p = 3`, `q = 5`, and `e = 3`.  
+   - Compute `n = 15` and `ø(n) = 8`.  
+   - Solve `d * 3 mod 8 = 1` → `d = 3`.  
+
+---
