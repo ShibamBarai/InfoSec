@@ -898,3 +898,174 @@ The **Digital Signature Algorithm (DSA)** is a standard for generating digital s
 4. Security relies on the difficulty of solving discrete logarithms.  
 
 ---
+
+### **Introduction to Web Security**
+
+The web has become a universal platform for communication, commerce, and governance, making it an indispensable part of modern life. From online banking and shopping to government portals and individual communications, the web serves billions of users daily. However, as web usage grows, so do the associated risks and vulnerabilities.  
+
+#### **Why Web Security is Important**  
+Web security aims to protect the web infrastructure, services, and users from malicious attacks, unauthorized access, and data breaches. Without proper security measures, sensitive information, including passwords, financial transactions, and personal data, could be exposed.  
+
+---
+
+### **Key Threats to Web Security**
+
+#### **1. Integrity Threats:**  
+- Refers to unauthorized modification of data during transmission.  
+- For example, altering payment amounts in an online banking transaction.  
+- Such tampering can lead to loss of trust, financial damage, and system failures.  
+
+#### **2. Confidentiality Threats:**  
+- Sensitive information (e.g., passwords, credit card details) might be intercepted by attackers.  
+- Example: A hacker using a "man-in-the-middle" attack to steal login credentials from an insecure website.  
+
+#### **3. Denial of Service (DoS) Attacks:**  
+- Overwhelms web servers by flooding them with fake requests, making them unavailable to legitimate users.  
+- Example: Attackers disrupt an e-commerce website during a sale event, causing financial losses and reputational damage.  
+
+#### **4. Authentication Threats:**  
+- Attackers impersonate legitimate users or servers, leading to unauthorized access.  
+- Example: Phishing websites that mimic real websites to trick users into sharing sensitive information.  
+
+#### **The Need for Web Security Mechanisms:**  
+To counter these threats, we must implement **strong web security mechanisms** that include encryption, authentication, integrity checks, and secure communication protocols. These mechanisms ensure that web traffic remains confidential, authentic, and unaltered.
+
+---
+
+### **Web Traffic Security Approaches**
+
+Web traffic security can be implemented at various layers of the communication protocol stack. Each approach has unique characteristics and applications. 
+
+![image](https://github.com/user-attachments/assets/f51dbb43-34de-43b3-b0c6-94056d10491c)
+
+#### **1. Internet Protocol Security (IPsec):**  
+- Operates at the **network layer** of the Internet Protocol stack.  
+- Secures all communications between devices by authenticating and encrypting data packets.  
+
+#### **2. Security Above TCP:**  
+- Security mechanisms are applied at the **transport layer**.  
+- Example: Secure Socket Layer (SSL) and Transport Layer Security (TLS).  
+
+#### **3. Application-Specific Security:**  
+- Security is built into specific applications to meet their unique requirements.  
+- Example: Secure communication within email services (like Gmail) or encrypted messaging apps (like WhatsApp).  
+
+Each of these approaches addresses specific security needs and may be used individually or in combination to secure web traffic effectively.
+
+---
+
+### **Internet Protocol Security (IPsec)**
+
+#### **What is IPsec?**  
+IPsec is a suite of protocols designed to secure IP communications by encrypting and authenticating each packet of data. It ensures:  
+1. **Confidentiality:** By encrypting the data payload.  
+2. **Integrity:** By detecting and preventing unauthorized changes to the data.  
+3. **Authentication:** By verifying the identities of the communicating parties.
+
+#### **Components of IPsec:**  
+1. **Authentication Header (AH):**  
+   - Provides **data integrity** and **authentication** but does not encrypt the data.  
+   - Ensures that data has not been tampered with and verifies the sender’s identity.  
+
+2. **Encapsulating Security Payload (ESP):**  
+   - Provides **encryption** to secure the data, along with **integrity** and optional **authentication**.  
+   - Protects the confidentiality of data as well as its authenticity.  
+
+3. **Internet Key Exchange (IKE):**  
+   - A protocol used to negotiate and establish secure cryptographic keys between communicating parties.  
+
+#### **Modes of Operation in IPsec:**  
+1. **Transport Mode:**  
+   - Encrypts only the data payload of the packet.  
+   - The original IP header remains intact and is sent in plain text.  
+   - Suitable for communication between two devices (e.g., a client and a server).  
+
+2. **Tunnel Mode:**  
+   - Encrypts the entire original IP packet, including its header and payload.  
+   - The encrypted packet is then encapsulated in a new IP packet with a fresh header.  
+   - Provides complete protection of the original packet and is commonly used in Virtual Private Networks (VPNs).
+
+#### **Advantages of IPsec:**  
+- Provides end-to-end security for network traffic.  
+- Protects against eavesdropping, tampering, and spoofing.  
+- Can be used to create secure VPNs for remote access.  
+
+---
+
+### **Secure Socket Layer (SSL) and Transport Layer Security (TLS)**
+
+#### **What is SSL/TLS?**  
+SSL (Secure Socket Layer) and its successor TLS (Transport Layer Security) are protocols that provide secure communication over the web. Originally developed by Netscape, SSL became a standardized protocol for ensuring the confidentiality, integrity, and authentication of data exchanged between a client (e.g., a browser) and a server (e.g., a website).  
+
+#### **Key Features of SSL/TLS:**  
+1. Operates at the **transport layer**, above TCP.  
+2. Encrypts data to prevent eavesdropping.  
+3. Verifies the identities of both the client and the server.  
+4. Ensures that the data is not altered during transmission.  
+
+#### **Applications of SSL/TLS:**  
+- Online banking and financial transactions.  
+- Secure access to websites (e.g., HTTPS).  
+- Secure communication for email, file transfers, and messaging.  
+
+---
+
+### **SSL Architecture**
+![image](https://github.com/user-attachments/assets/a53e46f1-45a1-437a-bccb-8305eb65a5ca)
+
+SSL consists of two main components:  
+
+#### **1. SSL Connection:**  
+- A temporary communication link between a client and a server.  
+- Each connection is associated with one **SSL session**.  
+
+#### **2. SSL Session:**  
+- A longer-lasting association between a client and a server.  
+- Defines a set of cryptographic parameters that can be shared across multiple SSL connections.
+
+---
+
+### **SSL Handshake Protocol**
+
+The SSL Handshake Protocol is a step-by-step process that establishes a secure connection between the client and the server.  
+
+#### **Steps in the SSL Handshake Protocol:**
+1. **Establish Security Capabilities:**  
+   - The client and server agree on the cryptographic algorithms and parameters to use for secure communication.  
+
+2. **Server Authentication and Key Exchange:**  
+   - The server presents its digital certificate to the client, proving its identity.  
+   - The server and client exchange cryptographic information to generate shared encryption keys.  
+
+3. **Client Authentication and Key Exchange:**  
+   - If required, the client also presents its digital certificate to authenticate itself to the server.  
+   - Additional key exchange occurs, ensuring that both parties have the same encryption keys.  
+
+4. **Finish:**  
+   - Both the client and server confirm that the handshake is complete, and secure communication begins.  
+
+---
+
+### **SSL Record Protocol**
+
+![image](https://github.com/user-attachments/assets/98a04aa7-dec5-465b-98f0-49e5e687a8b7)
+
+The SSL Record Protocol provides two essential services for communication:  
+
+#### **1. Confidentiality:**  
+- Achieved using **symmetric encryption** with a shared secret key established during the handshake process.  
+- Common encryption algorithms used include:  
+  - AES, DES, 3DES, RC4, IDEA, etc.  
+- Messages are compressed before encryption to improve efficiency.  
+
+#### **2. Message Integrity:**  
+- Ensured using a **Message Authentication Code (MAC)**.  
+- The MAC ensures that the message has not been tampered with during transmission.  
+
+#### **How SSL Record Protocol Works:**  
+1. The data is fragmented into manageable blocks.  
+2. A MAC is computed for each block to ensure integrity.  
+3. The data block and MAC are encrypted together.  
+4. The encrypted block is transmitted to the recipient, who decrypts and verifies the MAC.
+
+---
