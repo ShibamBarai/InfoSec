@@ -1,4 +1,4 @@
-#### **Introduction to Information Security**
+### **Introduction to Information Security**
 - **What is Information Security?**
   - When data travels between computers, it often leaves the safety of its protected physical environment. Once out in the open, it becomes vulnerable to unauthorized people who may try to modify or misuse the data, either for fun or their own benefit.
   - Information security is all about protecting this data and the systems storing or transmitting it from:
@@ -150,3 +150,210 @@ Cryptanalysis is the process of trying to break encryption to uncover the origin
 
 4. **Chosen-Ciphertext Attack (CCA):**
    - The attacker chooses ciphertexts to be decrypted and analyzes the resulting plaintexts to gain insight into the decryption method.
+
+---
+
+### **Introduction to Classical Cryptography**
+
+Classical cryptography refers to the traditional methods used for encrypting and decrypting data before the invention of modern cryptographic techniques. These techniques focused on ensuring confidentiality and protecting sensitive information. Key elements in classical cryptography include:  
+
+1. **Encryption:**  
+   - The process of converting plaintext (readable text) into ciphertext (unreadable text) using an encryption algorithm and a key.  
+   - Example: Converting "HELLO" into "KHOOR" using a Caesar Cipher with a shift of 3.  
+
+2. **Decryption:**  
+   - The reverse process of turning ciphertext back into plaintext to make the message readable again.  
+   - Example: Converting "KHOOR" back into "HELLO" using the same key (a shift of 3).  
+
+3. **Key:**  
+   - A special piece of information required to perform encryption and decryption.  
+   - In symmetric cryptography, the same key is used for both encryption and decryption, while in asymmetric cryptography, different keys are used (public and private keys).  
+
+4. **Cipher:**  
+   - The algorithm or method used to perform encryption and decryption. It dictates how the plaintext is transformed into ciphertext and vice versa.  
+
+Classical cryptographic techniques are fundamental to understanding how modern encryption methods evolved. These methods, though simple, were effective during their time.
+
+---
+
+### **Ciphering Techniques**  
+
+Cryptography can be classified into two main types based on the key usage:
+
+#### 1. **Symmetric Cryptography**  
+   - Also known as **private-key cryptography** or **single-key cryptography**.  
+   - **How it works:** The same key is shared between the sender and the receiver. Both use the same key for encryption and decryption.  
+   - This method was widely used before the invention of public-key cryptography in the 1970s.  
+   - Example of symmetric ciphers:
+     - **Caesar Cipher** (a substitution cipher).
+     - **Data Encryption Standard (DES)** (a modern symmetric cipher).
+
+#### 2. **Asymmetric Cryptography**  
+   - Also known as **public-key cryptography**.  
+   - **How it works:** Two keys are used: a public key and a private key.  
+     - The **public key** is shared with everyone and is used for encryption.  
+     - The **private key** is kept secret by the owner and is used for decryption.  
+   - Example of asymmetric ciphers:
+     - **RSA (Rivest-Shamir-Adleman Algorithm)**.
+     - **ECC (Elliptic Curve Cryptography)**.
+
+---
+
+### **Types of Ciphers**
+
+There are two primary types of ciphers, based on how the plaintext is transformed:
+
+#### 1. **Substitution Ciphers**  
+   - In substitution ciphers, each letter or symbol in the plaintext is replaced with another letter or symbol according to a specific rule or key.  
+   - Examples of substitution ciphers include:
+     - **Caesar Cipher**
+     - **Monoalphabetic Cipher**
+     - **Polyalphabetic Ciphers** (e.g., Vigenère Cipher)
+     - **Playfair Cipher**
+     - **Hill Cipher**
+
+#### 2. **Transposition Ciphers**  
+   - In transposition ciphers, the positions of the letters in the plaintext are rearranged (permuted) to form the ciphertext.  
+   - Unlike substitution ciphers, the letters themselves remain unchanged.  
+   - Examples include:
+     - **Rail Fence Cipher**
+     - **Row-Column Transposition Cipher**
+
+---
+
+### **Substitution Ciphers in Detail**
+
+#### **Caesar Cipher**
+- One of the simplest and oldest substitution ciphers.  
+- Invented by Julius Caesar for secure communication during military campaigns.  
+- **How it works:** Each letter in the plaintext is replaced by a letter that is a fixed number of positions down the alphabet.  
+- **Example with a shift of 3:**
+  - Plaintext: **meet me after the toga party**  
+  - Ciphertext: **PHHW PH DIWHU WKH WRJD SDUWB**  
+
+##### **Mathematical Representation:**
+1. Encryption:  
+   `C = (P + K) mod 26`  
+   - `C` is the ciphertext letter.  
+   - `P` is the plaintext letter’s position in the alphabet (0-25).  
+   - `K` is the shift key.  
+
+2. Decryption:  
+   `P = (C - K) mod 26`  
+   - The same key (`K`) is used to revert the ciphertext back to plaintext.
+
+**Example:**
+- Plaintext: **JAVATPOINT**  
+- Encryption (Shift = 3):  
+  Ciphertext: **MDYDWSRLQW**
+
+**Weakness of Caesar Cipher:**
+- **Brute Force Attack:** Since there are only 26 possible shifts, an attacker can try all shifts to decode the message.  
+- Example:
+  - Ciphertext: **GCUA VQ DTGCM**  
+  - By trying all 26 shifts, the plaintext can be easily recovered.
+
+---
+
+#### **Monoalphabetic Cipher**
+- Instead of a simple shift, letters are shuffled randomly to create the key.  
+- Each plaintext letter maps to a unique ciphertext letter.  
+- Example Key:  
+  Plain: **abcdefghijklmnopqrstuvwxyz**  
+  Cipher: **DKVQFIBJWPESCXHTMYAUOLRGZN**  
+
+**Example:**
+- Plaintext: **if we wish to replace letters**  
+- Ciphertext: **WIRFRWAJUHYFTSDVFSFUUFYA**
+
+**Challenge:**  
+- Though more secure than Caesar Cipher, monoalphabetic ciphers can still be broken using **frequency analysis**, as the same plaintext letter always maps to the same ciphertext letter.
+
+---
+
+#### **Vigenère Cipher**
+- A **polyalphabetic substitution cipher** that uses multiple Caesar Ciphers with different shift values.  
+- A **keyword** determines the shift for each letter in the plaintext.
+
+**Steps to Encrypt:**
+1. Write the plaintext.  
+2. Repeat the keyword above the plaintext until it matches the plaintext’s length.  
+3. Each letter in the plaintext is shifted based on the corresponding keyword letter.
+
+**Mathematical Representation:**  
+1. Encryption: `C = (P + K) mod 26`  
+2. Decryption: `P = (C - K) mod 26`  
+
+**Example:**
+- Keyword: **DECEPTIVE**  
+- Plaintext: **we are discovered save yourself**  
+- Ciphertext: **ZICVTWQNGRZGVTWAVZHCQYGLMGJ**
+
+**Strength:**  
+- Harder to break than monoalphabetic ciphers as the same letter in the plaintext can be encrypted differently depending on its position.
+
+---
+
+#### **Playfair Cipher**
+- Invented by Charles Wheatstone in 1854 but named after Baron Playfair.  
+- Encrypts pairs of letters (digrams) instead of single letters, making it more secure.  
+
+**Key Matrix:**
+1. A 5x5 grid of letters is created using a keyword (e.g., **MONARCHY**).  
+2. Duplicate letters are removed, and **I** and **J** are treated as the same.  
+
+Example Matrix:  
+```
+M O N A R  
+H Y B F G  
+I/J P Q S T  
+U V W X Z  
+```
+
+**Encryption Steps:**
+1. Divide the plaintext into pairs of letters (e.g., **attack** → **at ta ck**).  
+2. Follow these rules:
+   - If both letters are in the same row, shift them to the right.  
+   - If both are in the same column, shift them downward.  
+   - Otherwise, form a rectangle and swap the corners.
+
+**Example:**
+- Plaintext: **attack**  
+- Ciphertext: **rs sr de**
+
+**Strength:**  
+- Stronger than monoalphabetic ciphers but still vulnerable to analysis with enough ciphertext.
+
+---
+
+### **Transposition Ciphers in Detail**
+
+#### **Rail Fence Cipher**
+- A simple transposition cipher where the plaintext is written diagonally across multiple rows and then read row by row.  
+
+**Example:**
+- Plaintext: **meet me after the toga party**  
+- Write diagonally in 2 rows:  
+  ```
+  m e m a t r h t g p r y  
+  e t e f e t e o a a t
+  ```
+- Ciphertext: **MEMATRHTGPRYETEFETEOAAT**
+
+---
+
+#### **Row Transposition Cipher**
+- The plaintext is written in rows over a set number of columns, then the columns are rearranged based on a key.
+
+**Example:**
+- Key: **4312567**  
+- Plaintext:  
+  ```
+  a t t a c k p  
+  o s t p o n e  
+  d u n t i l t  
+  w o a m x y z  
+  ```
+- Ciphertext: **TTNAAPTMTSUOAODWCOIXKNLYPETZ**
+
+--- 
