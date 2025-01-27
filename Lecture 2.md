@@ -1,4 +1,4 @@
-### **Introduction to Information Security**
+## **Introduction to Information Security**
 - **What is Information Security?**
   - When data travels between computers, it often leaves the safety of its protected physical environment. Once out in the open, it becomes vulnerable to unauthorized people who may try to modify or misuse the data, either for fun or their own benefit.
   - Information security is all about protecting this data and the systems storing or transmitting it from:
@@ -153,7 +153,7 @@ Cryptanalysis is the process of trying to break encryption to uncover the origin
 
 ---
 
-### **Introduction to Classical Cryptography**
+## **Introduction to Classical Cryptography**
 
 Classical cryptography refers to the traditional methods used for encrypting and decrypting data before the invention of modern cryptographic techniques. These techniques focused on ensuring confidentiality and protecting sensitive information. Key elements in classical cryptography include:  
 
@@ -358,7 +358,7 @@ U V W X Z
 
 --- 
 
-### **Introduction to Modern Ciphering Techniques**
+## **Introduction to Modern Ciphering Techniques**
 
 Modern ciphering techniques are advancements in cryptography that address the limitations of classical methods. These techniques focus on higher security, computational efficiency, and adaptability for modern applications. Two key categories of modern ciphers are **block ciphers** and **stream ciphers.**  
 
@@ -528,7 +528,7 @@ The **Advanced Encryption Standard (AES)** replaced DES as the standard encrypti
 
 --- 
 
-### **Introduction to Asymmetric Cryptography (Public-Key Cryptography)**
+## **Introduction to Asymmetric Cryptography (Public-Key Cryptography)**
 
 #### **What is Asymmetric Cryptography?**
 Asymmetric cryptography, also known as public-key cryptography or two-key cryptography, is a method of encryption that uses **two separate keys**:  
@@ -715,7 +715,7 @@ The **RSA Algorithm** is one of the most widely used public-key encryption metho
 
 ---
 
-### **Introduction to Authentication and Integrity**
+## **Introduction to Authentication and Integrity**
 
 In today’s digital world, ensuring the security and trustworthiness of communication is vital. **Authentication** and **integrity** are two pillars of secure communication:
 
@@ -899,7 +899,7 @@ The **Digital Signature Algorithm (DSA)** is a standard for generating digital s
 
 ---
 
-### **Introduction to Web Security**
+## **Introduction to Web Security**
 
 The web has become a universal platform for communication, commerce, and governance, making it an indispensable part of modern life. From online banking and shopping to government portals and individual communications, the web serves billions of users daily. However, as web usage grows, so do the associated risks and vulnerabilities.  
 
@@ -1070,7 +1070,7 @@ The SSL Record Protocol provides two essential services for communication:
 
 ---
 
-### **Introduction to Email Security**
+## **Introduction to Email Security**
 
 Email is one of the most widely used network services in the world. It is a primary mode of communication for individuals, businesses, and governments. Despite its widespread use and importance, email communication is highly vulnerable to various security threats.  
 
@@ -1226,5 +1226,191 @@ PGP provides three primary security services for email: **Authentication**, **Co
   - **56-bit DES (Data Encryption Standard)**.  
   - **128-bit CAST or IDEA.**  
   - **168-bit Triple-DES.**  
+
+---
+
+## **Introduction to Database Security**
+
+#### **What is Database Security?**  
+Database security refers to the protection of a database against threats such as unauthorized access, data breaches, misuse, or attacks. Since databases store vast amounts of sensitive and critical information, securing them is essential for:  
+1. **Safeguarding Sensitive Data:** Ensuring that personal, financial, or organizational data is not exposed or stolen.  
+2. **Protecting Organizational Assets:** Databases often store crucial operational data. Their protection ensures smooth functioning of businesses and institutions.  
+3. **Ensuring Regulatory Compliance:** Many industries have legal obligations (e.g., GDPR, HIPAA) to secure their databases to protect user privacy and sensitive data.  
+
+---
+
+### **Key Threats to Databases**
+
+Databases face several types of threats that can compromise security:  
+
+#### **1. SQL Injection:**  
+- **Definition:** A code injection technique that exploits vulnerabilities in the database layer of an application.  
+- **Impact:** Enables attackers to execute unauthorized SQL queries, leading to data breaches, unauthorized access, or data modification.  
+
+#### **2. Insider Threats:**  
+- Employees or individuals with legitimate access to the database might misuse their privileges to access restricted or sensitive information.  
+- Example: A disgruntled employee stealing or altering confidential company records.  
+
+#### **3. Malware & Ransomware Attacks:**  
+- Databases can be targeted by malicious software that:  
+  - Encrypts the data and demands a ransom for decryption (ransomware).  
+  - Exfiltrates or corrupts data (malware).  
+
+#### **4. Unauthorized Access:**  
+- Weak authentication mechanisms (e.g., simple passwords) can allow attackers to gain access to the database.  
+- Example: Hackers brute-forcing weak admin passwords to gain control over the database.  
+
+#### **5. Data Breaches:**  
+- Unauthorized exposure of sensitive information, such as customer data, financial records, or intellectual property.  
+- Example: Leaking millions of user credentials due to weak database protection.
+
+---
+
+### **SQL Injection (SQLi)**
+
+#### **What is SQL Injection?**  
+SQL Injection is a vulnerability that occurs when user inputs are improperly sanitized, allowing attackers to inject malicious SQL code into a database query.  
+
+#### **How SQL Injection Works:**  
+- Applications that directly use user input in database queries without proper validation are vulnerable.  
+- Attackers exploit this by entering specially crafted inputs to execute unauthorized SQL commands.  
+
+#### **Key Impacts of SQL Injection:**  
+1. **Data Breaches:** Attackers can extract sensitive data, such as passwords, financial information, or personal records.  
+2. **Unauthorized Access:** Attackers may log into applications without valid credentials.  
+3. **Data Deletion or Modification:** Attackers can alter or delete important data.  
+
+#### **Examples of SQL Injection Attacks:**  
+
+**Example 1: Bypassing Authentication**  
+1. **Input Provided by Attacker:**  
+   - Username: `' OR '1'='1`  
+   - Password: `--` (comment out the rest of the query).  
+2. **Resulting Query:**  
+   ```sql
+   SELECT * FROM Users 
+   WHERE username = '' OR '1'='1' -- AND password = '';
+   ```
+   - The condition `'1'='1'` always evaluates to **true**, bypassing authentication.  
+
+**Example 2: Modifying Data**  
+1. **Input Provided by Attacker:**  
+   ```sql
+   a'; UPDATE Users SET name='pqr' WHERE id=1; --
+   ```  
+2. **Resulting Query:**  
+   ```sql
+   SELECT userid, name FROM Users WHERE userid='a'; 
+   UPDATE Users SET name='pqr' WHERE id=1; --';
+   ```
+   - This query alters the name of the user with ID `1` to `pqr`.  
+
+---
+
+### **Preventing SQL Injection**
+
+To secure databases against SQL Injection, several best practices must be followed:  
+
+1. **Input Validation:**  
+   - Ensure that all user inputs are validated to match expected formats.  
+   - Disallow special characters like `'`, `;`, and `--`.  
+
+2. **Parameterized Queries and Prepared Statements:**  
+   - Use placeholders in SQL queries instead of directly inserting user input.  
+   - Example (using Python):  
+     ```python
+     cursor.execute("SELECT * FROM Users WHERE username = ? AND password = ?", (username, password))
+     ```
+
+3. **Limit Database Privileges:**  
+   - Restrict database users to the minimum privileges required for their tasks.  
+   - Avoid granting **administrator-level access** to applications.  
+
+4. **Error Handling:**  
+   - Do not display detailed database error messages to users, as they may provide insights into vulnerabilities.  
+
+5. **Web Application Firewalls (WAFs):**  
+   - Deploy WAFs to monitor and block SQL Injection attempts in real-time.
+
+---
+
+### **Core Components of Database Security**
+
+A robust database security strategy includes several key components:  
+
+#### **1. Authentication:**  
+- Ensures that only authorized users can access the database.  
+- Uses techniques like passwords, multi-factor authentication (MFA), and biometric authentication.  
+
+#### **2. Authorization:**  
+- Defines what each user is allowed to do within the database.  
+- Role-Based Access Control (RBAC) assigns permissions based on user roles (e.g., admin, manager, employee).  
+
+#### **3. Encryption:**  
+- Protects data both **at rest** (stored in the database) and **in transit** (sent over a network).  
+- Example: Encrypting sensitive fields like credit card numbers using AES encryption.  
+
+#### **4. Backup and Recovery:**  
+- Regularly backing up databases ensures that data can be restored in case of accidental deletion, corruption, or ransomware attacks.  
+
+#### **5. Auditing and Monitoring:**  
+- Logs all database activities in real-time to detect and respond to suspicious actions.  
+- Example: Monitoring unauthorized access attempts or unusual data modifications.  
+
+---
+
+### **Granularity Levels in Database Security**
+
+Access control in databases can be applied at different levels of granularity, depending on the sensitivity and purpose of the data:  
+
+#### **1. Relation-Level Granularity:**  
+- Access is granted or restricted to entire tables (relations).  
+- Example:  
+  - A **manager** needs access to the entire **Employees** table for performance reviews.  
+  - SQL Command:  
+    ```sql
+    GRANT SELECT ON Employees TO Manager;
+    ```
+
+#### **2. Tuple-Level Granularity:**  
+- Access is controlled at the row (tuple) level, allowing users to access only specific rows.  
+- Example:  
+  - A **doctor** should only access patient records assigned to them.  
+  - SQL Command:  
+    ```sql
+    CREATE VIEW DoctorPatients AS
+    SELECT * FROM PatientRecords WHERE Doctor = 'Dr. Smith';
+    ```
+  - Dr. Smith will only see rows where the **Doctor** column contains their name.  
+
+#### **3. Attribute-Level Granularity:**  
+- Access is restricted at the column (attribute) level, hiding sensitive fields from certain users.  
+- Example:  
+  - Regular employees should not see the **Salary** column in the **Employees** table.  
+  - SQL Command:  
+    ```sql
+    CREATE VIEW EmployeeView AS
+    SELECT EmployeeID, Name, Role FROM Employees;
+    ```
+  - Regular employees querying **EmployeeView** will not see the **Salary** column.
+
+---
+
+### **The Role of the Database Administrator (DBA)**
+
+The **Database Administrator (DBA)** is the central authority responsible for managing and securing the database system.  
+
+#### **Key Responsibilities of the DBA:**  
+1. **Granting Privileges:**  
+   - Assigns appropriate access rights to users based on their roles and responsibilities.  
+
+2. **Classifying Users and Data:**  
+   - Organizes users and data into categories (e.g., confidential, restricted) based on organizational policies.  
+
+3. **Database Security:**  
+   - Implements security measures such as encryption, backups, and auditing to protect the database.  
+
+4. **Ensuring Compliance:**  
+   - Ensures that the database meets regulatory and legal requirements for data protection (e.g., GDPR, HIPAA).  
 
 ---
